@@ -2,29 +2,46 @@
 
 | CS-665       | Software Design & Patterns |
 |--------------|----------------------------|
-| Name         | FIRST_NAME LAST_NAME       |
-| Date         | MM/DD/YYYY                 |
-| Course       | Fall / Spring / Summer     |
-| Assignment # |                            |
+| Name         | Haonan Chen                |
+| Date         | 11/10/2024                 |
+| Course       | Fall                       |
+| Assignment # | 2                          |
 
-# Assignment Overview
-Please add a paragraph or two overviewing the objectives of the assignment.
+# # Delivery System Project
+This project implements a notification system that informs drivers about delivery requests. It uses the Observer design pattern to notify all registered drivers when a new delivery request is created.
 
 # GitHub Repository Link:
-https://github.com/{YOUR_USERNAME}/cs-665-assignment-{ASSIGNMENT_NUMBER}
+https://github.com/HaonanChen-2024/cs-665-assignment--2-
 
 # Implementation Description 
 
 
 For each assignment, please answer the following:
 
-- Explain the level of flexibility in your implementation, including how new object types can
-be easily added or removed in the future.
-- Discuss the simplicity and understandability of your implementation, ensuring that it is
-easy for others to read and maintain.
-- Describe how you have avoided duplicated code and why it is important.
-- If applicable, mention any design patterns you have used and explain why they were
-chosen.
+1. Flexibility in the Implementation
+   The implementation uses the Observer design pattern to handle the notification system, which makes it highly flexible. By using the Observer interface, the system can easily add or remove different types of objects (like different kinds of delivery agents) without modifying the core logic of the system. For example:
+
+To add a new type of driver (e.g., DroneDriver), simply create a class that implements the Observer interface, and the system will automatically send notifications to instances of that class.
+The DeliveryObservable interface defines the methods for adding and removing observers (drivers), allowing for dynamic management of participants in the notification system. Future expansion of object types (e.g., more specific driver types, notification systems) can be done without altering the existing codebase.
+2. Simplicity and Understandability
+   The system is structured in a simple and modular way:
+
+Each class has a well-defined responsibility, which adheres to the Single Responsibility Principle (SRP). For example, the Shop class is responsible for managing drivers and broadcasting delivery requests, while the Driver class is responsible for receiving and managing messages.
+The clear separation of concerns ensures that the code is easy to read, maintain, and extend. Methods are short, descriptive, and focus on specific tasks, making the code more understandable.
+The use of standard naming conventions and following the Google Java Style Guide makes the code readable for other developers.
+3. Avoiding Duplicated Code
+   Code duplication is avoided by:
+
+Implementing reusable methods, such as notifyDrivers, which handles the core logic for sending notifications to all drivers. This method is called internally by sendDeliveryRequest, ensuring that the notification logic is centralized.
+The Observer interface is implemented in the Driver class, so any future driver classes can inherit the behavior without duplicating code. This modularity ensures that the notification mechanism remains consistent across all types of drivers.
+The use of interfaces (Observer, DeliveryObservable) allows for better separation of concerns, reducing the likelihood of duplicated functionality across different parts of the system.
+4. Design Patterns
+   The primary design pattern used in this implementation is the Observer Pattern. It was chosen because:
+
+It provides a natural way to handle notifications in a distributed system where multiple drivers (observers) need to be informed of a new delivery request from a shop (observable).
+The pattern decouples the sender (shop) from the receivers (drivers), which increases flexibility and scalability. The shop does not need to know the details of each driver, only that they implement the Observer interface.
+This pattern makes it easy to add new types of drivers or modify existing ones without affecting the shop’s core logic, which aligns with the open/closed principle (OCP) of software design.
+By leveraging the Observer pattern, the system maintains flexibility, ease of understanding, and eliminates code duplication, making it a robust and scalable solution for the delivery notification system.
 
 
 # Maven Commands
